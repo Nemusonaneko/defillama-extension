@@ -25,22 +25,30 @@ async function historicalChange(protocol, period) {
   }
 }
 
-async function getData() {
-  const response = await fetch("../protocols/protocols.json");
-  const data = await response.json();
-  let hostname = new URL(await getCurrentTabUrl()).hostname;
-  hostname = hostname.split(".");
-  const domain =
-    hostname[hostname.length - 2] + "." + hostname[hostname.length - 1];
-  if (data[domain] === undefined) return;
-  const apiRequest = await fetch(`https://api.llama.fi/protocols`);
-  const apiResponse = await apiRequest.json();
-  let protocol;
-  apiResponse.forEach((p) => {
-    if (p.name.toLowerCase() === data[domain]) {
-      protocol = p;
+async function getDomain(url) {
+  let domain;
+  const hostname = new URL(url).hostname.split(".");
+  domain = hostname[hostname.length - 2] + "." + hostname[hostname.length - 1];
+  return domain.toString();
+}
+
+async function getProtocol(protocols, tabDomain) {
+  for (let i = 0; i < protocols.length; i++) {
+    const protocolDomain = await getDomain(protocols[i].url);
+    if (protocolDomain === tabDomain) {
+      return protocols[i];
     }
-  });
+  }
+  return undefined;
+}
+
+async function getData() {
+  const tabUrl = await getCurrentTabUrl();
+  const tabDomain = await getDomain(tabUrl);
+  const apiRequest = await fetch(`https://api.llama.fi/protocols`);
+  const protocols = await apiRequest.json();
+  let protocol = await getProtocol(protocols, tabDomain);
+  if (protocol === undefined) return;
   document.getElementById("protocol_name").innerHTML = protocol.name;
   document.getElementById("total_tvl").innerHTML = await getTotalTvl(protocol);
   document.getElementById("change_hour").innerHTML = await historicalChange(
@@ -55,7 +63,9 @@ async function getData() {
     protocol,
     "week"
   );
-  document.getElementById("site_link").href = `https://defillama.com/protocol/${data[domain].replace(" ", "-")}`;
+  document.getElementById(
+    "site_link"
+  ).href = `https://defillama.com/protocol/${data[domain].replace(" ", "-")}`;
 }
 
 getData();
