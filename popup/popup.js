@@ -12,14 +12,15 @@ async function returnTotalTvl(protocolInfo) {
 async function returnChange(protocolInfo, days) {
   const currentTvl = Number(protocolInfo.tvl[protocolInfo.tvl.length - 1].totalLiquidityUSD);
   const historicTvl = Number(protocolInfo.tvl[protocolInfo.tvl.length - (Number(days) + 1)].totalLiquidityUSD);
-  const change = Math.round(currentTvl - historicTvl).toLocaleString();
+  let change = Math.round(currentTvl - historicTvl);
   let percentChange = Number((((currentTvl - historicTvl) / historicTvl) * 100).toFixed(2));
   if (percentChange > 0) {
     return `<span style='color:#5ec809'> +${await padPercentage(percentChange)}% $${change} </span>`;
   }
   else if (percentChange < 0) {
+    change = (change * -1).toLocaleString();
     percentChange = percentChange * -1;
-    return `<span style='color:#f43e1c'> -${await padPercentage(percentChange)}% $${change} </span>`;
+    return `<span style='color:#f43e1c'> -${await padPercentage(percentChange)}% -$${change} </span>`;
   }
   else {
     return `${formattedPercent}%`;
