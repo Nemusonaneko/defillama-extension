@@ -65,7 +65,9 @@ async function getData() {
   );
   document.getElementById(
     "site_link"
-  ).href = `https://defillama.com/protocol/${protocol.name.toLowerCase().replace(" ", "-")}`;
+  ).href = `https://defillama.com/protocol/${protocol.name
+    .toLowerCase()
+    .replace(" ", "-")}`;
 }
 
 getData();
