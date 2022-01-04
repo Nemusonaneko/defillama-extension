@@ -100,10 +100,11 @@ async function getProtocol(protocols, tabDomain) {
 }
 
 async function getScannerLink(data) {
-    let address = data.address.split(":");
+    let address = data.address;
     if (!address.includes(":")) {
       return `<a href="https://etherscan.io/address/${data.address}" target="blank">View on Etherscan</a>`;
     }
+    address = address.split(":");
     for (let key in blockExplorers) {
         if (address[0] === key) {
             return `<a href=${blockExplorers[key][0]}${address[1]} target="blank"> View on ${blockExplorers[key][1]}</a>`
@@ -150,15 +151,6 @@ async function getEntries(data) {
     return `1 Entry`
   }
   return `${Object.keys(data.chainTvls).length} Entries`;
-}
-
-async function getForks(data) {
-  const forks = data.forkedFrom;
-  let result = "";
-  for (let i in forks) {
-    result += `${forks[i]} `;
-  }
-  return result
 }
 
 async function displayData() {
