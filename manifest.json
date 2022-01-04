@@ -1,7 +1,7 @@
 {
   "name": "DefiLlama",
   "description": "Extension for DefiLlama which shows brief TVL info for a protocol",
-  "version": "0.0.1.1",
+  "version": "0.0.1.2",
   "manifest_version": 3,
   "icons": {
     "16": "./icons/defillama-logo-16.png",
