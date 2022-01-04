@@ -3,23 +3,23 @@
 
 <head>
   <link rel="stylesheet" href="popup.css" />
+  <meta charset="utf-8"/>
 </head>
 
 <body>
   <div class="window">
     <div class="top">
       <div class="logo">
-        <img src="../icons/defillama.png" height="36px" />
+        <img src="../icons/defillama.svg" height="40px" />
       </div>
     </div>
     <div class="tab">
       <button class="taboption" id="general">General</button>
       <button class="taboption" id="detailed">Detailed</button>
-      <button class="taboption" id="about">Llama</button>
     </div>
     <div class="tabcontent" id="general">
       <div class="title">
-        <h1 id="name">Nani</h1>
+        <a id="name" href="https://defillama.com/" target="blank">Nani? ↗</a>
       </div>
       <h2 class="generalLabel">TVL</h2>
       <p class="generalData" id="tvl">No TVL</p>
@@ -29,7 +29,28 @@
       <p class="generalData" id="day">No Data</p>
       <h2 class="generalLabel">1W</h2>
       <p class="generalData" id="week">No Data</p>
-      <a id="llamalink" href="https://defillama.com/" target="blank">DefiLlama Listing</a>
+      <div class="contactinfo">
+        <div class="icon">
+          <a href="https://twitter.com/DefiLlama" target="blank">
+            <img src="../icons/twitter.png" height="24px" />
+          </a>
+        </div>
+        <div class="icon">
+          <a href="https://discord.com/invite/buPFYXzDDd" target="blank">
+            <img src="../icons/discord.png" height="24px" />
+          </a>
+        </div>
+        <div class="icon">
+          <a href="https://t.me/defillama_tg" target="blank">
+            <img src="../icons/telegram.png" height="24px" />
+          </a>
+        </div>
+        <div class="icon">
+          <a href="https://github.com/DefiLlama" target="blank">
+            <img src="../icons/github.png" height="24px" />
+          </a>
+        </div>
+      </div>
     </div>
     <div class="tabcontent" id="detailed">
       <h2 class="detailLabel">TVL Breakdown</h2>
@@ -46,20 +67,30 @@
       <p class="detailData" id="category">No Category</p>
       <h2 class="detailLabel">Audit Status</h2>
       <p class="detailData" id="audit">Not Audited</p>
-    </div>
-    <div class="tabcontent" id="about">
-      <h1 style="font-size: 24px;">Llama Info</h2>
-        <div class="contactlink">
-          <a href="https://twitter.com/DefiLlama" target="blank">DefiLlama Twitter</a> <br />
-          <a href="https://discord.com/invite/buPFYXzDDd" target="blank">DefiLlama Discord</a> <br />
-          <a href="https://github.com/DefiLlama" target="blank">Contribute to DefiLlama</a> <br />
-          <a href="https://github.com/Nemusonaneko/defillama-extension" target="blank">Extension Repo</a> <br />
-          <a href="https://gitcoin.co/grants/3591/defillama" target="blank">Feed the Llamas</a> <br />
-          <a href="https://twitter.com/nemusonaUwU" target="blank">Bully Nemusona</a>
+      <div class="contactinfo">
+        <div class="icon">
+          <a href="https://twitter.com/DefiLlama" target="blank">
+            <img src="../icons/twitter.png" height="24px" />
+          </a>
         </div>
+        <div class="icon">
+          <a href="https://discord.com/invite/buPFYXzDDd" target="blank">
+            <img src="../icons/discord.png" height="24px" />
+          </a>
+        </div>
+        <div class="icon">
+          <a href="https://t.me/defillama_tg" target="blank">
+            <img src="../icons/telegram.png" height="24px" />
+          </a>
+        </div>
+        <div class="icon">
+          <a href="https://github.com/DefiLlama" target="blank">
+            <img src="../icons/github.png" height="24px" />
+          </a>
+        </div>
+      </div>
     </div>
-  </div>
-  <script src="popup.js"></script>
+    <script src="popup.js"></script>
 </body>
 
 </html>

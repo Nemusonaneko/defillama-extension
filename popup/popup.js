@@ -5,13 +5,14 @@ for (let i = 0; i < extTabs.length; i++) {
   extTabs[i].addEventListener("click", function () {
     let id = extTabs[i].id;
     for (let i = 0; i < extTabContents.length; i++) {
+      extTabContents[i].style.display = "none";
+        extTabs[i].className = extTabs[i].className.replace(" active", "");
+    }
+    for (let i = 0; i < extTabContents.length; i++) {
       if (extTabContents[i].id === id) {
         extTabContents[i].style.display = "";
         extTabs[i].className += " active";
-      } else {
-        extTabContents[i].style.display = "none";
-        extTabs[i].className = extTabs[i].className.replace(" active", "");
-      }
+      } 
     }
   });
 } 
@@ -53,6 +54,12 @@ async function getCurrentTabUrl() {
   const queryOptions = { active: true, currentWindow: true };
   const browserTab = await chrome.tabs.query(queryOptions);
   return browserTab[0].url;
+}
+
+async function getTitle(data) {
+  const name = data.name;
+  const link = `https://defillama.com/protocol/${name.toLowerCase().replace(" ", "-")}`
+  return `<a id="name" href=${link} target="blank">${name} ↗</a>`
 }
 
 async function getTotalTvl(data) {
@@ -106,12 +113,12 @@ async function getProtocol(protocols, tabDomain) {
 async function getScannerLink(data) {
     let address = data.address;
     if (!address.includes(":")) {
-      return `<a href="https://etherscan.io/address/${data.address}" target="blank">View on Etherscan</a>`;
+      return `<a href="https://etherscan.io/address/${data.address}" target="blank">View on Etherscan ↗</a>`;
     }
     address = address.split(":");
     for (let key in blockExplorers) {
         if (address[0] === key) {
-            return `<a href=${blockExplorers[key][0]}${address[1]} target="blank"> View on ${blockExplorers[key][1]}</a>`
+            return `<a href=${blockExplorers[key][0]}${address[1]} target="blank"> View on ${blockExplorers[key][1]} ↗</a>`
         }
     }
     return "No Token"
@@ -130,23 +137,17 @@ async function getBreakdown(data) {
     const chains = data.chainTvls;
     let result = "";
     for (let i in chains) {
-      result+= `<p>${i}: $${Math.round(chains[i]).toLocaleString()}</p>\n`
+      result += `<p>${i}: $${Math.round(chains[i]).toLocaleString()}</p>\n`
     }
     return result;
 }
 
 async function getAudit(data) {
-  switch (data.audits) {
-    case "0":
-      return "No Audit";
-    case "1":
-      return "Partially Audited";
-    case "2":
-      return "Audited";
-    case "3":
-      return "Fork of Audited Protocol"
-    default:
-      break;
+  if (data.audits === "0" || data.audits === "1") {
+    return "Not Audited"
+  }
+  if (data.audits === "2" || data.audits === "3") {
+    return "Audited"
   }
 }
 
@@ -161,7 +162,7 @@ async function displayData() {
   const data = await getData();
   if (data === undefined) return;
   // General info
-  document.getElementById("name").innerHTML = data.name;
+  document.getElementById("name").innerHTML = await getTitle(data);
   document.getElementById("tvl").innerHTML = await getTotalTvl(data.tvl);
   document.getElementById("hour").innerHTML = await historicalChange(data, "hour");
   document.getElementById("day").innerHTML = await historicalChange(data, "day");
@@ -173,7 +174,6 @@ async function displayData() {
   document.getElementById("breakdowndata").innerHTML = await getBreakdown(data);
   document.getElementById("market_cap").innerHTML = await getTotalTvl(data.mcap);
   document.getElementById("audit").innerHTML = await getAudit(data);
-  document.getElementById("llamalink").href = `https://defillama.com/protocol/${data.name.toLowerCase().replace(" ", "-")}`;
 }
 
 document.getElementById("general").click();

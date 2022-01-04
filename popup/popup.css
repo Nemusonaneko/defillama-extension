@@ -1,58 +1,64 @@
 body {
-  width: 275px;
-  height: 500px;
-  background-color: #0a3849;
+  width: 260px;
+  height: 530px;
+  background-color: #2d3143;
+  position: relative;
 }
 
 .window {
   color: white;
+  
 }
 
 .title {
   text-align: center;
-  font-size: 14px;
+  font-weight: bold;
+}
+
+#name {
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
 }
 
 .tab {
   display: flex;
-  flex-direction: row;
   min-width: 100%;
-  align-items: center;
   margin-top: 10px;
   margin-bottom: 10px;
+  column-count: 2;
+  justify-content: center;
 }
 
 .tab button {
-  background-color: #4692a0;
+  background-color: #6d6e7a;
   outline: none;
   border: none;
   height: 30px;
-  width: 90px;
-  margin: 5px;
+  width: 100%;
   text-align: center;
   color: white;
-  border-radius: 15px;
-  
+  font-weight: bold;
 }
 
 .tab button:hover {
-  background-color: #d26761;
+  background-color: #404454;
 }
 
 .tab button.active {
-  background-color: #d26761;
+  background-color: #404454;
   border-bottom: 10px;
 }
 
 .generalLabel {
-  font-size: 18px;
+  font-size: 20px;
   text-align: left;
 }
 
 .generalData {
-  font-size: 16px;
+  font-size: 18px;
   text-align: left;
-  margin-left: 5px;
+  margin-left: 10px;
 }
 
 .detailLabel {
@@ -63,11 +69,10 @@ body {
 .detailData {
   font-size: 16px;
   text-align: left;
-  margin-left: 5px;
+  margin-left: 10px;
 }
 
 #llamalink {
-  font-size: 18px;
   font-weight: bold;
   text-align: left;
 }
@@ -77,19 +82,19 @@ body {
 }
 
 .dropbutton {
-  background-color: #4692a0;
-  font-size: 14px;
+  background-color: #6d6e7a;
+  font-size: 16px;
   font-weight: bold;
   border: none;
   color: white;
-  height: 25px;
+  height: 30px;
   width: 100px;
 }
 
 .dropcontent {
   display: none;
   position: absolute;
-  background-color: #317581;
+  background-color: #404454;
   text-align: left;
   min-width: 250px;
   max-height: 300px;
@@ -103,16 +108,26 @@ body {
 }
 
 .dropdown:hover .dropbutton {
-  background: #d26761;
+  background: #404454;
 }
 
-.contactlink {
-  font-size: 20px;
-  font-weight: bold;
-  text-align: left;
-  margin: 5px;
+.contactinfo {
+  margin-top: 20px;
+  width: 100%;
+  column-count: 4;
+  position: absolute;
+  bottom: 0;
+}
+
+.icon {
+  justify-content: center;
+  display: flex;
 }
 
 a {
   color:white;
+}
+
+a:link {
+  text-decoration: none;
 }
