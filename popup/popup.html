@@ -1,38 +1,62 @@
 <!DOCTYPE html>
+<html>
+
 <head>
   <link rel="stylesheet" href="popup.css" />
 </head>
+
 <body>
-  <div class="container">
-    <div class="logo">
-      <img src="../icons/defillama.png" height="40px" />
-    </div>
-    <div class="name">
-      <p id="protocol_name">N/A</p>
-    </div>
-    <div id="data_table">
-      <div class="data_title">
-        Total Value Locked
-        <p class="data" id="total_tvl">N/A</p>
-      </div>
-      <div class="data_title">
-        Change 1H
-        <p class="data" id="change_hour">N/A</p>
-      </div>
-      <div class="data_title">
-        Change 1D
-        <p class="data" id="change_day">N/A</p>
-      </div>
-      <div class="data_title">
-        Change 7D
-        <p class="data" id="change_week">N/A</p>
+  <div class="window">
+    <div class="top">
+      <div class="logo">
+        <img src="../icons/defillama.png" height="36px" />
       </div>
     </div>
-    <div class="links">
-      <a href="https://defillama.com/" target="blank" id="site_link"
-        >More Info</a
-      >
+    <div class="tab">
+      <button class="taboption" id="general">General</button>
+      <button class="taboption" id="detailed">Detailed</button>
+      <button class="taboption" id="about">About</button>
+    </div>
+    <div class="tabcontent" id="general">
+      <div class="title">
+        <h1 id="name">Nani</h1>
+      </div>
+      <h2 class="generalLabel">TVL</h2>
+      <p class="generalData" id="tvl">No TVL</p>
+      <h2 class="generalLabel">1H</h2>
+      <p class="generalData" id="hour">No Data</p>
+      <h2 class="generalLabel">1D</h2>
+      <p class="generalData" id="day">No Data</p>
+      <h2 class="generalLabel">1W</h2>
+      <p class="generalData" id="week">No Data</p>
+    </div>
+    <div class="tabcontent" id="detailed">
+      <h2 class="detailLabel">TVL Breakdown</h2>
+      <div class="dropdown">
+        <button class="dropbutton" id="breakdownsbutton">No Entries</button>
+        <div class="dropcontent" id="breakdowndata">
+        </div>
+      </div>
+      <h2 class="detailLabel">Token</h2>
+      <p class="detailData" id="token">No Token</p>
+      <h2 class="detailLabel">Market Cap</h2>
+      <p class="detailData" id="market_cap">No Market Cap</p>
+      <h2 class="detailLabel">Category</h2>
+      <p class="detailData" id="category">No Category</p>
+      <h2 class="detailLabel">Audit Status</h2>
+      <p class="detailData" id="audit">Not Audited</p>
+      <a id="llamalink" href="https://defillama.com/" target="blank">DefiLlama Listing</a>
+    </div>
+    <div class="tabcontent" id="about">
+      <h1 style="font-size: 24px;">Issues or Suggestions?</h2>
+        <div class="contactlink">
+          <a href="https://twitter.com/DefiLlama" target="blank">DefiLlama Twitter</a> <br />
+          <a href="https://discord.com/invite/buPFYXzDDd" target="blank">DefiLlama Discord</a> <br />
+          <a href="https://github.com/Nemusonaneko/defillama-extension" target="blank">GitHub Repo</a> <br />
+        </div>
     </div>
   </div>
   <script src="popup.js"></script>
 </body>
+
+</html>
