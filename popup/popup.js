@@ -64,6 +64,7 @@ async function getMarketCap(protocol) {
 }
 
 async function historicalChange(protocol, period) {
+  const tvl = protocol.tvl;
   let percentChange;
   if (period === "hour") {
     percentChange = protocol.change_1h;
@@ -74,9 +75,10 @@ async function historicalChange(protocol, period) {
   }
 
   if (percentChange > 0) {
-    return `<span style='color:#5ec809'> +${percentChange.toFixed(2)}% </span>`;
+    return `<span style='color:#5ec809'> +${percentChange.toFixed(2)}% (+$${Math.round(tvl * (percentChange/ 100)).toLocaleString()}) </span>`;
   } else if (percentChange < 0) {
-    return `<span style='color:#f43e1c'> ${percentChange.toFixed(2)}% </span>`;
+    percentChange *= -1;
+    return `<span style='color:#f43e1c'> -${percentChange.toFixed(2)}% (-$${Math.round(tvl * (percentChange/ 100)).toLocaleString()})</span>`;
   }
 }
 
