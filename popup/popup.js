@@ -55,12 +55,16 @@ async function getCurrentTabUrl() {
   return browserTab[0].url;
 }
 
-async function getTotalTvl(protocol) {
-  return `$${Math.round(protocol.tvl).toLocaleString()}`;
-}
-
-async function getMarketCap(protocol) {
-  return `$${Math.round(protocol.mcap).toLocaleString()}`;
+async function getTotalTvl(data) {
+  if (data < 1000000) {
+    return `$${Math.round(data).toLocaleString()}`
+  }
+  else if (data >= 1000000 && data < 1000000000) {
+    return `$${(data / 1000000).toFixed(2)}M`
+  }
+  else if (data >= 1000000000) {
+    return `$${(data / 1000000000).toFixed(2)}B`
+  }
 }
 
 async function historicalChange(protocol, period) {
@@ -75,10 +79,10 @@ async function historicalChange(protocol, period) {
   }
 
   if (percentChange > 0) {
-    return `<span style='color:#5ec809'> +${percentChange.toFixed(2)}% (+$${Math.round(tvl * (percentChange/ 100)).toLocaleString()}) </span>`;
+    return `<span style='color:#5ec809'> +${percentChange.toFixed(2)}%</span>`;
   } else if (percentChange < 0) {
     percentChange *= -1;
-    return `<span style='color:#f43e1c'> -${percentChange.toFixed(2)}% (-$${Math.round(tvl * (percentChange/ 100)).toLocaleString()})</span>`;
+    return `<span style='color:#f43e1c'> -${percentChange.toFixed(2)}%</span>`;
   }
 }
 
@@ -158,7 +162,7 @@ async function displayData() {
   if (data === undefined) return;
   // General info
   document.getElementById("name").innerHTML = data.name;
-  document.getElementById("tvl").innerHTML = await getTotalTvl(data);
+  document.getElementById("tvl").innerHTML = await getTotalTvl(data.tvl);
   document.getElementById("hour").innerHTML = await historicalChange(data, "hour");
   document.getElementById("day").innerHTML = await historicalChange(data, "day");
   document.getElementById("week").innerHTML = await historicalChange(data, "week");
@@ -167,7 +171,7 @@ async function displayData() {
   document.getElementById("token").innerHTML = await getScannerLink(data);
   document.getElementById("breakdownsbutton").innerHTML = await getEntries(data);
   document.getElementById("breakdowndata").innerHTML = await getBreakdown(data);
-  document.getElementById("market_cap").innerHTML = await getMarketCap(data);
+  document.getElementById("market_cap").innerHTML = await getTotalTvl(data.mcap);
   document.getElementById("audit").innerHTML = await getAudit(data);
   document.getElementById("llamalink").href = `https://defillama.com/protocol/${data.name.toLowerCase().replace(" ", "-")}`;
 }

@@ -16,7 +16,7 @@ body {
 .tab {
   display: flex;
   flex-direction: row;
-  width: 100%;
+  min-width: 100%;
   align-items: center;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -31,6 +31,8 @@ body {
   margin: 5px;
   text-align: center;
   color: white;
+  border-radius: 15px;
+  
 }
 
 .tab button:hover {
@@ -39,10 +41,11 @@ body {
 
 .tab button.active {
   background-color: #d26761;
+  border-bottom: 10px;
 }
 
 .generalLabel {
-  font-size: 20px;
+  font-size: 18px;
   text-align: left;
 }
 
@@ -53,18 +56,18 @@ body {
 }
 
 .detailLabel {
-  font-size: 16px;
+  font-size: 18px;
   text-align: left;
 }
 
 .detailData {
-  font-size: 14px;
+  font-size: 16px;
   text-align: left;
   margin-left: 5px;
 }
 
 #llamalink {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   text-align: left;
 }
@@ -107,7 +110,7 @@ body {
   font-size: 20px;
   font-weight: bold;
   text-align: left;
-  margin-bottom: 10px;
+  margin: 5px;
 }
 
 a {
